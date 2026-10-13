@@ -29,6 +29,9 @@ const designationRouter = express.Router();
  *               name:
  *                 type: string
  *                 example: Manager
+ *               companyId:
+ *                 type: integer
+ *                 example: 1
  *               status:
  *                 type: boolean
  *                 example: true
@@ -80,6 +83,9 @@ designationRouter.get('/list', List);
  *               name:
  *                 type: string
  *                 example: Senior Manager
+ *               companyId:
+ *                 type: integer
+ *                 example: 1
  *               status:
  *                 type: boolean
  *                 example: true

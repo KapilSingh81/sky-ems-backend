@@ -1,12 +1,19 @@
 import { Op } from "sequelize";
 import ResponseService from "../utils/httpService.js";
 import { departmentModel } from "../model/departmentModel.js";
+import { companyModel } from "../model/compnayModel.js";
 
+const include = [
+    {model : companyModel, as : "company", attributes : ["id", "name"]}
+]
 const Create = async (req, res) => {
     try {
-        const { name, status } = req.body;
+        const { name, status, companyId  } = req.body;
         if (!name || !name.trim()) {
             return ResponseService.badRequest(res, 'Department name is required');
+        }
+        if(!companyId) {
+            return ResponseService.badRequest(res, "Company id is required")
         }
 
         const checkDept = await departmentModel.findOne({
@@ -19,6 +26,7 @@ const Create = async (req, res) => {
         const department = await departmentModel.create({
             name: name.trim(),
             status: status ?? true,
+            companyId : companyId
         });
         return ResponseService.created(res,  department, 'Department created successfully');
     } catch (error) {
@@ -31,6 +39,7 @@ const List = async (req, res) => {
         const departments = await departmentModel.findAll({
             where: { is_deleted: false },
             order: [['id', 'DESC']],
+            include
         });
         return ResponseService.success(res, 'Success', departments);
     } catch (error) {
@@ -48,11 +57,13 @@ const update = async (req, res) => {
         });
         if (!department) return ResponseService.notFound(res, 'Department not found');
 
-        const { name, status } = req.body;
+        const { name, status , companyId } = req.body;
         if (!name || !name.trim()) {
             return ResponseService.badRequest(res, 'Department name is required');
         }
-
+        if(!companyId) {
+            return ResponseService.badRequest(res, "Company id is required");
+        }
         const duplicate = await departmentModel.findOne({
             where: { name: name.trim(), is_deleted: false, id: { [Op.ne]: id } },
         });
@@ -63,6 +74,7 @@ const update = async (req, res) => {
         await department.update({
             name: name.trim(),
             status: status ?? department.status,
+            companyId : companyId
         });
         return ResponseService.success(res, 'Department updated successfully', department);
     } catch (error) {

@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/db.config.js";
+import { companyModel } from "./compnayModel.js";
 
 export const departmentModel = sequelize.define(
   "department_master",
@@ -15,6 +16,11 @@ export const departmentModel = sequelize.define(
       type: DataTypes.STRING(100),
       allowNull: false,
       unique: true,
+    },
+    companyId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: { model: "company_master", key: "id" },
     },
     status: {
       type: DataTypes.BOOLEAN, 
@@ -33,3 +39,6 @@ export const departmentModel = sequelize.define(
     timestamps: false,
   }
 );
+departmentModel.belongsTo(companyModel, { foreignKey: "companyId", as: "company" });
+companyModel.hasMany(departmentModel, { foreignKey: "companyId", as: "departments" });
+

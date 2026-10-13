@@ -7,6 +7,11 @@ import { swaggerSpec } from "./config/swagger.config.js";
 import swaggerUi from "swagger-ui-express";
 import designationRouter from "./routes/designationRoutes.js";
 import companyRouter from "./routes/companyRoutes.js";
+import leaveTypeRouter from "./routes/leaveTypeRoutes.js";
+import holidayRouter from "./routes/holidayRoutes.js";
+import roleRouter from "./routes/roleRoutes.js";
+import commonRouter from "./routes/commonRoutes.js";
+import employeeRouter from "./routes/employeeRoutes.js";
 
 const app = express();
 dotenv.config();
@@ -16,7 +21,11 @@ app.use(express.json());
 app.use("/api/department", departmentRouter);
 app.use("/api/designation", designationRouter);
 app.use("/api/company", companyRouter);
-
+app.use("/api/leaveType", leaveTypeRouter);
+app.use("/api/holiday", holidayRouter);
+app.use("/api/role", roleRouter);
+app.use("/api/common", commonRouter);
+app.use("/api/employee", employeeRouter);
 
 const PORT = process.env.PORT;
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));

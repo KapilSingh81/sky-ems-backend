@@ -29,6 +29,9 @@ const departmentRouter = express.Router();
  *               name:
  *                 type: string
  *                 example: Human Resources
+ *               companyId:
+ *                 type: integer
+ *                 example: 1
  *               status:
  *                 type: boolean
  *                 example: true
@@ -80,6 +83,9 @@ departmentRouter.get('/list', List);
  *               name:
  *                 type: string
  *                 example: Finance
+ *               companyId:
+ *                 type: integer
+ *                 example: 1
  *               status:
  *                 type: boolean
  *                 example: true
