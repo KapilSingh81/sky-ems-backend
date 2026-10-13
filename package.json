@@ -1,0 +1,26 @@
+{
+  "name": "sky-ems-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "server" : "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.7",
+    "encrypt": "^0.0.1",
+    "express": "^5.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "mssql": "^12.7.4",
+    "nodemon": "^3.1.14",
+    "sequelize": "^6.37.8",
+    "swagger-jsdoc": "^6.3.0",
+    "swagger-ui-express": "^5.0.1",
+    "validators": "^0.3.1"
+  }
+}
